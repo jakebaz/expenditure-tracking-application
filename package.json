@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sbx:deploy": "npx ampx sandbox",
+    "sbx:teardown": "npx ampx sandbox delete"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "~6.13.2",
@@ -31,14 +33,20 @@
   "devDependencies": {
     "@aws-amplify/backend": "~1.19.0",
     "@aws-amplify/backend-cli": "~1.8.1",
+    "@aws-sdk/client-dynamodb": "^3.1175.0",
+    "@aws-sdk/client-s3": "^3.1175.0",
+    "@aws-sdk/lib-dynamodb": "^3.1175.0",
     "@eslint/compat": "~2.0.1",
     "@eslint/eslintrc": "~3.3.3",
     "@eslint/js": "~9.39.2",
+    "@types/aws-lambda": "^8.10.164",
+    "@types/node": "^26.6.6",
     "@types/react": "~18.3.27",
     "@types/react-dom": "~18.3.7",
     "@typescript-eslint/eslint-plugin": "~8.53.0",
     "@typescript-eslint/parser": "~8.53.0",
     "@vitejs/plugin-react": "~5.1.2",
+    "csv-parse": "^7.0.3",
     "esbuild": "~0.27.2",
     "eslint": "~9.39.2",
     "eslint-plugin-react-hooks": "~7.0.1",

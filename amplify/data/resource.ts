@@ -17,6 +17,28 @@ const schema = a.schema({
       uploadedAt: a.datetime().required(),
     })
     .authorization((allow) => [allow.group("household")]),
+
+  // One row per statement line. Written by the process-statement Lambda when a
+  // CSV is uploaded; the dashboard only reads these.
+  Transaction: a
+    .model({
+      account: a.string().required(), // e.g. "amex"
+      documentPath: a.string().required(), // S3 key of the source statement
+      date: a.date().required(),
+      month: a.string().required(), // "YYYY-MM", for grouping and filtering
+      description: a.string().required(), // raw statement text
+      merchant: a.string().required(),
+      category: a.string().required(),
+      kind: a.enum(["spend", "refund", "payment"]),
+      amount: a.float().required(), // as on the statement: refunds/payments are negative
+      cardMember: a.string(),
+    })
+    .secondaryIndexes((index) => [
+      index("account")
+        .sortKeys(["date"])
+        .queryField("listTransactionsByAccountAndDate"),
+    ])
+    .authorization((allow) => [allow.group("household")]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
