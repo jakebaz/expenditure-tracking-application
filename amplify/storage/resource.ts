@@ -8,7 +8,7 @@ import { processStatement } from '../functions/process-statement/resource';
  * @see https://docs.amplify.aws/react/build-a-backend/storage
  */
 export const storage = defineStorage({
-  name: 'expenditureDocuments',
+  name: 'statements',
   triggers: {
     onUpload: processStatement,
   },
